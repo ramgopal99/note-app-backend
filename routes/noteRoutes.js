@@ -1,7 +1,6 @@
 import express from 'express';
 import {
   getAllNotes,
-  getNoteById,
   createNote,
   updateNote,
   deleteNote
@@ -10,12 +9,19 @@ import authenticate from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.use(authenticate); // Apply authentication middleware to all routes
+// Apply authentication middleware to all routes
+router.use(authenticate);
 
+// Get all notes
 router.get('/', getAllNotes);
-router.get('/:id', getNoteById);
+
+// Create a new note
 router.post('/', createNote);
-router.put('/:id', updateNote);
-router.delete('/:id', deleteNote);
+
+// Update an existing note
+router.put('/', updateNote); // Assumes note data is passed in the body for updating
+
+// Delete a note
+router.delete('/', deleteNote); // Assumes note data is passed in the body for deletion
 
 export default router;
